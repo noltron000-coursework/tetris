@@ -1,0 +1,6 @@
+{
+	"name": "react-app",
+	"jsx": true,
+	"redux": false,
+	"styleExt": "css"
+}
