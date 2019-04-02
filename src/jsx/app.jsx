@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 
 import '../css/app.css'
-import Square from '../jsx/square.jsx'
+import Next from '../jsx/next.jsx'
 import Board from '../jsx/board.jsx'
+import HUD from '../jsx/hud.jsx'
 
 class app extends Component {
 	render() {
@@ -10,7 +11,8 @@ class app extends Component {
 			<div>
 				<h1>hello world</h1>
 				<Board />
-
+				<Next />
+				<HUD />
 			</div>
 		)
 	}

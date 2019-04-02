@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Square from '../jsx/square.jsx'
 
 // Represents a 10 x 18 grid of grid squares
-
 class Board extends Component {
 
 	// generates an array of 18 rows, each containing 10 Squares.
