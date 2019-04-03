@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
 
-class HUD extends Component {
+class Score extends Component {
 
 	render() {
 		return (
-			<div className="hud">
+			<div className="score">
 				<div>Score:{ this.props.score }</div>
 				<div>Level: 1</div>
 
-				<button className="hud-button" onClick={(e) => {
+				<button className="score-button" onClick={(e) => {
 
 				}}>Play</button>
 
-				<button className="hud-button" onClick={(e) => {
+				<button className="score-button" onClick={(e) => {
 
 				}}>Restart</button>
 
@@ -21,4 +21,4 @@ class HUD extends Component {
 	}
 }
 
-export default HUD
+export default Score
