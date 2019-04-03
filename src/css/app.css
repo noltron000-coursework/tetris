@@ -81,12 +81,40 @@
 	box-sizing: border-box;
 }
 
-/* Grid Board - This defines the `grid-board` to display as `grid`. This causes the children of this element to arrange on a grid. The number of columns is set by `--cols` var and the width of each column is set by `--tile-size`. These two CSS custom properties are defined in `:root` which allow them to be easily changed.*/
-.board {
+/* App */
+.app {
+	--col-side: calc(var(--tile-size) * 4);
+	--col-center: calc(var(--tile-size) * 10);
+	--grid-height: calc(var(--tile-size) * 18);
+
+	width: calc(var(--tile-size) * (4 + 1 + 10 + 1 + 4));
+	margin: auto;
 	display: grid;
-	grid-template-columns: repeat(var(--cols), var(--tile-size));
-	grid-gap: 0;
-	align-self: flex-start;
+
+	grid-gap: var(--tile-size) var(--tile-size);
+	/* Defines three columns of `--col-side`, `--col-center`, and `--col-side` widths. */
+	grid-template-columns: var(--col-side) var(--col-center) var(--col-side);
+	/* Defines three rows of 1, `--grid-height`, and 1. */
+	grid-template-rows: 1 var(--grid-height) 1;
+
+/* This defines the areas on the grid with names: 'h', 'l', 'c', 'r',
+and 'b'. The '.' represents an empty cell on the grid. */
+	grid-template-areas: "h h h"
+	                     "l c r"
+	                     ". b .";
+}
+
+.head {
+	background-color: #282c34;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: calc(10px + 2vmin);
+	color: white;
+
+	grid-area: h;
+
 }
 
 /* Next Block */
@@ -94,50 +122,40 @@
 	display: grid;
 	grid-template-columns: repeat(4, var(--tile-size));
 	align-self: flex-start;
+
+	grid-area: l;
 }
 
-/* Score Board */
-.score-board-button {
+/* Grid Board - This defines the `grid-board` to display as `grid`. This causes the children of this element to arrange on a grid. The number of columns is set by `--cols` var and the width of each column is set by `--tile-size`. These two CSS custom properties are defined in `:root` which allow them to be easily changed.*/
+.board {
+	display: grid;
+	grid-template-columns: repeat(var(--cols), var(--tile-size));
+	grid-gap: 0;
+	align-self: flex-start;
+
+	grid-area: c;
+}
+
+.score {
+	grid-area: r;
+}
+
+.controls {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+
+	grid-area: b;
+}
+
+/* ELEMENTS NOT CLASSES */
+
+button {
 	padding: 0;
-	display: block;
-	padding: 1em;
+	padding: 0.25em;
 	border-width: 5px;
 	border-top-color: var(--button-color-t);
 	border-left-color: var(--button-color-l);
 	border-right-color: var(--button-color-r);
 	border-bottom-color: var(--button-color-b);
-}
-
-.app {
-	text-align: center;
-}
-
-.app-logo {
-	animation: app-logo-spin infinite 20s linear;
-	height: 40vmin;
-	pointer-events: none;
-}
-
-.app-header {
-	background-color: #282c34;
-	min-height: 10vh;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	font-size: calc(10px + 2vmin);
-	color: white;
-}
-
-.app-link {
-	color: #61dafb;
-}
-
-@keyframes app-logo-spin {
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg);
-	}
 }
