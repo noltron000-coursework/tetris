@@ -148,6 +148,37 @@ and 'b'. The '.' represents an empty cell on the grid. */
 	grid-area: b;
 }
 
+
+/* Message Popup - These styles apply to the `MessagePopup` container. With `position:absolute` this element can be placed anywhere on the screen, `left, top, transform:translate` perform this function.*/
+.overlay {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 100vw;
+	height: 100vh;
+	border-color: black;
+	border: dotted;
+	background-color: rgba(255, 255, 255, 0.85);
+	text-align: center;
+}
+
+.overlay {
+	font-size: 2em;
+}
+
+/* This style is applied only when the message popup container
+has both `message-popup` class and the `hidden` class. In this
+case the Message Popup is not displayed */
+.overlay.hidden {
+	display: none;
+}
+
+
+
 /* ELEMENTS NOT CLASSES */
 
 button {

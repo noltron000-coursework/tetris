@@ -6,6 +6,7 @@ import Next from '../jsx/next.jsx'
 import Board from '../jsx/board.jsx'
 import Score from '../jsx/score.jsx'
 import Controls from '../jsx/controls.jsx'
+import Overlay from '../jsx/overlay.jsx'
 
 class App extends Component {
 	render() {
@@ -16,6 +17,7 @@ class App extends Component {
 				<Board />
 				<Score />
 				<Controls />
+				<Overlay />
 			</div>
 		)
 	}
