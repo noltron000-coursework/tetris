@@ -1,3 +1,5 @@
+import { default_state } from '../utilities'
+
 import {
 	PAUSE,
 	RESUME,
@@ -10,7 +12,7 @@ import {
 	ROTATE_LEFT,
 	ROTATE_RIGHT } from '../actions'
 
-const gameReducer = (state = {}, action) => {
+const game_reducer = (state = default_state(), action) => {
 	switch(action.type) {
 		case PAUSE:
 			return state
@@ -47,4 +49,4 @@ const gameReducer = (state = {}, action) => {
 	}
 }
 
-export default gameReducer
+export default game_reducer

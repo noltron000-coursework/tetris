@@ -5,7 +5,7 @@ import Square from '../jsx/square.jsx'
 class Board extends Component {
 
 	// generates an array of 18 rows, each containing 10 Squares.
-	makeGrid() {
+	make_grid() {
 		const grid = []
 		for (let row = 0; row < 18; row ++) {
 			grid.push([])
@@ -17,11 +17,11 @@ class Board extends Component {
 		return grid
 	}
 
-	// The components generated in makeGrid are rendered in div.board
+	// The components generated in make_grid are rendered in div.board
 	render () {
 		return (
 			<div className='board'>
-				{this.makeGrid()}
+				{this.make_grid()}
 			</div>
 		)
 	}
