@@ -149,14 +149,14 @@ export const default_state = () => {
 		x: 5,
 		y: -4,
 		// set the index of the next shape to a new random shape
-		nextShape: random_shape(),
+		next_shape: random_shape(),
 		// Tell the game that it's currently running
-		isRunning: true,
+		is_running: true,
 		// Set the score to 0
 		score: 0,
 		// Set the default speed
 		speed: 1000,
 		// Game isn't over yet
-		gameOver: false
+		game_over: false
 	}
 }

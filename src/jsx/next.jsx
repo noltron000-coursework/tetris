@@ -6,8 +6,8 @@ import { shapes } from '../utilities/'
 // Map State to props
 const map_state_to_props = (state) => {
 	return {
-		// Return nextShape as shape
-		shape: state.game.nextShape
+		// Return next_shape as shape
+		shape: state.game.next_shape
 	}
 }
 

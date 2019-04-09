@@ -10,50 +10,50 @@ import {
 
 const map_state_to_props = (state) => {
 	return {
-		isRunning: state.game.isRunning
+		is_running: state.game.is_running
 	}
 }
 
 class Controls extends Component {
 	render() {
-		const { isRunning } = this.props
+		const { is_running } = this.props
 
 		return (
 			<div className="controls">
 				{/* up */}
 				<button className="control-button" onClick={(e) => {
-					if (!isRunning) { return }
+					if (!is_running) { return }
 					this.props.move_up()
 				}}>Up</button>
 
 				{/* down */}
 				<button className="control-button" onClick={(e) => {
-					if (!isRunning) { return }
+					if (!is_running) { return }
 					this.props.move_down()
 				}}>Down</button>
 
 				{/* left */}
 				<button className="control-button" onClick={(e) => {
-					if (!isRunning) { return }
+					if (!is_running) { return }
 					this.props.move_left()
 				}}>Left</button>
 
 				{/* right */}
 				<button className="control-button" onClick={(e) => {
-					if (!isRunning) { return }
+					if (!is_running) { return }
 					this.props.move_right()
 				}}>Right</button>
 
 
 				{/* spin left */}
 				<button onClick={(e) => {
-					if (!isRunning) { return }
+					if (!is_running) { return }
 					this.props.rotate_left()
 				}}>Rotate Left</button>
 
 				{/* spinR */}
 				<button onClick={(e) => {
-					if (!isRunning) { return }
+					if (!is_running) { return }
 					this.props.rotate_right()
 				}}>Rotate Right</button>
 
