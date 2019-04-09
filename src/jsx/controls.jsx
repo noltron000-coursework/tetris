@@ -17,6 +17,55 @@ const map_state_to_props = (state) => {
 }
 
 class Controls extends Component {
+	// this function is built in and is called when mounted
+	componentDidMount() {
+		document.addEventListener('keydown', (event) => {
+			const keyName = event.key;
+
+			const {
+				move_up,
+				move_down,
+				move_left,
+				move_right,
+				rotate_left,
+				rotate_right
+			} = this.props
+
+			switch(keyName) {
+				case 'w':
+				case 'ArrowUp':
+					move_up()
+					break
+
+				case 's':
+				case 'ArrowDown':
+					move_down()
+					break
+
+				case 'a':
+				case 'ArrowLeft':
+					move_left()
+					break
+
+				case 'd':
+				case 'ArrowRight':
+					move_right()
+					break
+
+				case 'q':
+					rotate_left()
+					break
+
+				case 'e':
+					rotate_right()
+					break
+
+				default:
+					break
+			}
+		}, false);
+	}
+
 	render() {
 		const { is_running, game_over } = this.props
 
