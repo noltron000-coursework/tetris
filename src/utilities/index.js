@@ -166,6 +166,9 @@ export const default_state = () => {
 export const next_rotation = (shape, rotation) => {
 	return (rotation + 1) % shapes[shape].length
 }
+export const prev_rotation = (shape, rotation) => {
+	return (rotation - 1) % shapes[shape].length
+}
 
 export const can_move_to = (shape, grid, x, y, rotation) => {
 	const current_shape = shapes[shape][rotation]

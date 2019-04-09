@@ -1,6 +1,7 @@
 import {
 	default_state,
 	next_rotation,
+	prev_rotation,
 	can_move_to,
 	add_block_to_grid,
 	check_rows,
@@ -99,13 +100,17 @@ const game_reducer = (state = default_state(), action) => {
 			return state
 
 		case ROTATE_LEFT:
-			const new_rotation = next_rotation(shape, rotation)
-			if (can_move_to(shape, grid, x, y, new_rotation)) {
-				return { ...state, rotation: new_rotation }
+			const new_rotation_l = next_rotation(shape, rotation)
+			if (can_move_to(shape, grid, x, y, new_rotation_l)) {
+				return { ...state, rotation: new_rotation_l }
 			}
 			return state
 
 		case ROTATE_RIGHT:
+			const new_rotation_r = prev_rotation(shape, rotation)
+			if (can_move_to(shape, grid, x, y, new_rotation_r)) {
+				return { ...state, rotation: new_rotation_r }
+			}
 			return state
 
 		default:
