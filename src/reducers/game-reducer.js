@@ -1,7 +1,11 @@
 import {
 	default_state,
 	next_rotation,
-	can_move_to } from '../utilities'
+	can_move_to,
+	add_block_to_grid,
+	check_rows,
+	random_shape,
+} from '../utilities'
 
 import {
 	PAUSE,
@@ -22,9 +26,9 @@ const game_reducer = (state = default_state(), action) => {
 		x,
 		y,
 		rotation,
-		// next_shape,
-		// score,
-		// is_running
+		next_shape,
+		score,
+		is_running
 	} = state
 
 	switch(action.type) {
@@ -44,14 +48,41 @@ const game_reducer = (state = default_state(), action) => {
 			return state
 
 		case MOVE_LEFT:
-			// subtract 1 from the x and check if this new position is possible by calling `canMoveTo()
+			// subtract 1 from the x and check if this new position is possible by calling `can_move_to()
 			if (can_move_to(shape, grid, x - 1, y, rotation)) {
 					return { ...state, x: x - 1 }
 			}
 			return state
 
 		case MOVE_DOWN:
-			return state
+			// Get the next potential Y position
+			const maybeY = y + 1
+			// Check if the current block can move here
+			if (can_move_to(shape, grid, x, maybeY, rotation)) {
+					// If so move the block
+					return { ...state, y: maybeY }
+			}
+			// If not place the block
+			const new_grid = add_block_to_grid(shape, grid, x, y, rotation)
+			// reset some things to start a new shape/block
+			const newState = default_state()
+			newState.grid = new_grid
+			newState.shape = next_shape
+			newState.next_shape = random_shape()
+			newState.score = score
+			newState.is_running = is_running
+
+			if (!can_move_to(next_shape, new_grid, 0, 4, 0)) {
+				// Game Over
+				console.log("Game Should be over...")
+				newState.shape = 0
+				return { ...state, gameOver: true }
+			}
+			// Update the score based on if rows were completed or not
+			newState.score = score + check_rows(new_grid)
+
+			return newState
+
 
 		case MOVE_RIGHT:
 			if (can_move_to(shape, grid, x + 1, y, rotation)) {
