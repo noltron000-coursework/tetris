@@ -155,7 +155,7 @@ export const default_state = () => {
 		// Set the score to 0
 		score: 0,
 		// Set the default speed
-		speed: 1000,
+		speed: 100,
 		// Game isn't over yet
 		game_over: false
 	}

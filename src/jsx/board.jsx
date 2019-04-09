@@ -7,8 +7,20 @@ import Square from '../jsx/square.jsx'
 import { move_down } from '../actions/'
 import { shapes } from '../utilities/'
 
+
+
 // Represents a 10 x 18 grid of grid squares
 class Board extends Component {
+	constructor(props) {
+		super(props)
+		this.last_update_time = 0
+		this.progress_time = 0
+	}
+
+	// this function is built in and is called when mounted
+	componentDidMount() {
+		window.requestAnimationFrame(this.update.bind(this))
+	}
 
 	// generates an array of 18 rows, each containing 10 Squares.
 	make_grid() {
@@ -48,6 +60,33 @@ class Board extends Component {
 							</Square>
 			})
 		})
+	}
+
+	// Handle game updates
+	update(time) {
+		// If the game is is running we want to request a callback at the next animation frame.
+		window.requestAnimationFrame(this.update.bind(this))
+		if (!this.props.is_running) {
+			return
+		}
+
+		// If last_update_time not been set, set it to the current time.
+		if (!this.last_update_time) {
+			this.last_update_time = time
+		}
+
+		// Calculate delta time and progress time
+		const delta_time = time - this.last_update_time
+		this.progress_time += delta_time
+
+		// If the progress time is greater than speed move the block down
+		if (this.progress_time > this.props.speed) {
+			this.props.move_down()
+			this.progress_time = 0
+		}
+
+		// set the last update time.
+		this.last_update_time = time
 	}
 
 	// The components generated in make_grid are rendered in div.board
