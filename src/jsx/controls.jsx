@@ -6,55 +6,63 @@ import {
 	move_right,
 	move_down,
 	rotate_left,
-	rotate_right } from '../actions'
+	rotate_right
+} from '../actions'
 
 const map_state_to_props = (state) => {
 	return {
-		is_running: state.game.is_running
+		is_running: state.game.is_running,
+		game_over: state.game.game_over
 	}
 }
 
 class Controls extends Component {
 	render() {
-		const { is_running } = this.props
+		const { is_running, game_over } = this.props
 
 		return (
 			<div className="controls">
 				{/* up */}
 				<button className="control-button" onClick={(e) => {
-					if (!is_running) { return }
-					this.props.move_up()
+					if (is_running && !game_over) {
+						this.props.move_up()
+					}
 				}}>Up</button>
 
 				{/* down */}
 				<button className="control-button" onClick={(e) => {
-					if (!is_running) { return }
-					this.props.move_down()
+					if (is_running && !game_over) {
+						this.props.move_down()
+					}
 				}}>Down</button>
 
 				{/* left */}
 				<button className="control-button" onClick={(e) => {
-					if (!is_running) { return }
-					this.props.move_left()
+					if (is_running && !game_over) {
+						this.props.move_left()
+					}
 				}}>Left</button>
 
 				{/* right */}
 				<button className="control-button" onClick={(e) => {
-					if (!is_running) { return }
-					this.props.move_right()
+					if (is_running && !game_over) {
+						this.props.move_right()
+					}
 				}}>Right</button>
 
 
 				{/* spin left */}
 				<button onClick={(e) => {
-					if (!is_running) { return }
-					this.props.rotate_left()
+					if (is_running && !game_over) {
+						this.props.rotate_left()
+					}
 				}}>Rotate Left</button>
 
 				{/* spinR */}
 				<button onClick={(e) => {
-					if (!is_running) { return }
-					this.props.rotate_right()
+					if (is_running && !game_over) {
+						this.props.rotate_right()
+					}
 				}}>Rotate Right</button>
 
 			</div>

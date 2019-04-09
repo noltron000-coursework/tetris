@@ -4,7 +4,6 @@ import {
 	can_move_to,
 	add_block_to_grid,
 	check_rows,
-	random_shape,
 } from '../utilities'
 
 import {
@@ -56,33 +55,41 @@ const game_reducer = (state = default_state(), action) => {
 
 		case MOVE_DOWN:
 			// Get the next potential Y position
-			const maybeY = y + 1
+			const maybe_y = y + 1
+
 			// Check if the current block can move here
-			if (can_move_to(shape, grid, x, maybeY, rotation)) {
-					// If so move the block
-					return { ...state, y: maybeY }
+			if (can_move_to(shape, grid, x, maybe_y, rotation)) {
+					// If so, move down & don't place the block
+					return { ...state, y: maybe_y }
 			}
+
 			// If not place the block
-			const new_grid = add_block_to_grid(shape, grid, x, y, rotation)
-			// reset some things to start a new shape/block
-			const newState = default_state()
-			newState.grid = new_grid
-			newState.shape = next_shape
-			newState.next_shape = random_shape()
-			newState.score = score
-			newState.is_running = is_running
+			// (this returns an object with a grid and gameover bool)
+			const obj = add_block_to_grid(shape, grid, x, y, rotation)
+			const new_grid = obj.grid
+			const game_over = obj.gameOver
 
-			if (!can_move_to(next_shape, new_grid, 0, 4, 0)) {
+			// check for game_over
+			if (game_over) {
 				// Game Over
-				console.log("Game Should be over...")
+				const newState = { ...state }
 				newState.shape = 0
-				return { ...state, gameOver: true }
+				newState.grid = new_grid
+				return { ...state, game_over: true }
 			}
+
+			// reset some things to start a new shape/block
+			const new_state = default_state()
+			new_state.grid = new_grid
+			new_state.shape = next_shape
+			new_state.score = score
+			new_state.is_running = is_running
+
+			// TODO: Check and Set level
 			// Update the score based on if rows were completed or not
-			newState.score = score + check_rows(new_grid)
+			new_state.score = score + check_rows(new_grid)
 
-			return newState
-
+			return new_state
 
 		case MOVE_RIGHT:
 			if (can_move_to(shape, grid, x + 1, y, rotation)) {
