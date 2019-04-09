@@ -99,16 +99,15 @@ class Controls extends Component {
 					}
 				}}>Right</button>
 
-
 				{/* spin left */}
-				<button onClick={(e) => {
+				<button className="control-button" onClick={(e) => {
 					if (is_running && !game_over) {
 						this.props.rotate_left()
 					}
 				}}>Rotate Left</button>
 
 				{/* spinR */}
-				<button onClick={(e) => {
+				<button className="control-button" onClick={(e) => {
 					if (is_running && !game_over) {
 						this.props.rotate_right()
 					}

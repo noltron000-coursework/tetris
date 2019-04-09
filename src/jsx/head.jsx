@@ -4,7 +4,7 @@ class Head extends Component {
 	render() {
 		return (
 		<div className='head'>
-			<h1>hello world</h1>
+			<h1>TETRIS</h1>
 		</div>
 		)
 	}
