@@ -164,10 +164,13 @@ export const default_state = () => {
 // Returns the next rotation for a shape
 // rotation can't exceed the last index of the the rotations for the given shape.
 export const next_rotation = (shape, rotation) => {
-	return (rotation + 1) % shapes[shape].length
+	const length = shapes[shape].length
+	return (rotation + length + 1) % length
 }
+
 export const prev_rotation = (shape, rotation) => {
-	return (rotation - 1) % shapes[shape].length
+	const length = shapes[shape].length
+	return (rotation + length - 1) % length
 }
 
 export const can_move_to = (shape, grid, x, y, rotation) => {
