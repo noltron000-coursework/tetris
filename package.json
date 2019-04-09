@@ -1,18 +1,45 @@
 {
+	"author": {
+		"name": "Nolan Kovacik",
+		"email": "kovacik.nolan@students.makeschool.com",
+		"url": "https://your-website.com"
+	},
+	"build": {
+		"appId": "com.my-website.my-app",
+		"productName": "MyApp",
+		"copyright": "Copyright © 2019 ${author}",
+		"mac": {
+			"category": "public.app-category.utilities"
+		},
+		"files": [
+			"build/**/*",
+			"node_modules/**/*"
+		],
+		"directories": {
+			"buildResources": "assets"
+		}
+	},
 	"name": "react-app",
 	"version": "0.1.0",
 	"private": true,
+	"homepage": "./",
 	"dependencies": {
+		"electron-is-dev": "^1.0.1",
 		"react": "^16.8.3",
 		"react-dom": "^16.8.3",
 		"react-redux": "^6.0.1",
 		"react-scripts": "^2.1.5",
 		"redux": "^4.0.1"
 	},
+	"main": "public/electron.js",
 	"scripts": {
-		"start": "react-scripts start",
-		"build": "react-scripts build",
-		"test": "react-scripts test",
+		"postinstall": "electron-builder install-app-deps",
+		"preelectron-pack": "yarn build",
+		"electron-pack": "build -mw",
+		"electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+		"start": "rescripts start",
+		"build": "rescripts build",
+		"test": "rescripts test",
 		"eject": "react-scripts eject"
 	},
 	"eslintConfig": {
@@ -23,5 +50,14 @@
 		"not dead",
 		"not ie <= 11",
 		"not op_mini all"
-	]
+	],
+	"devDependencies": {
+		"@rescripts/cli": "^0.0.10",
+		"@rescripts/rescript-env": "^0.0.10",
+		"concurrently": "^4.1.0",
+		"electron": "^4.1.4",
+		"electron-builder": "^20.39.0",
+		"typescript": "^3.4.2",
+		"wait-on": "^3.2.0"
+	}
 }
