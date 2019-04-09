@@ -7,26 +7,6 @@ import Square from '../jsx/square.jsx'
 import { move_down } from '../actions/'
 import { shapes } from '../utilities/'
 
-
-const map_state_to_props = (state) => {
-	return {
-		grid: state.game.grid,
-		shape: state.game.shape,
-		rotation: state.game.rotation,
-		x: state.game.x,
-		y: state.game.y,
-		speed: state.game.speed,
-		is_running: state.game.is_running
-	}
-}
-
-// Map Dipatch to Props
-const map_dispatch_to_props = () => {
-	return {
-		move_down
-	}
-}
-
 // Represents a 10 x 18 grid of grid squares
 class Board extends Component {
 
@@ -34,13 +14,17 @@ class Board extends Component {
 	make_grid() {
 		// collect properties mapped to props from state.
 		const { grid, shape, rotation, x, y } = this.props
+
 		// get the block which is the current shape the player is controlling
 		const block = shapes[shape][rotation]
 		const block_color = shape
+
 		// map rows
 		return grid.map((row_array, row) => {
+
 			// map columns
 			return row_array.map((square, col) => {
+
 				// Find the block x and y on the shape grid
 				// By subtracting the x and y from the col and the row we get the position of the upper left corner of the block array as if it was superimposed over the main grid
 				const block_x = col - x
@@ -52,8 +36,10 @@ class Board extends Component {
 				if (block_x >= 0 && block_x < block.length && block_y >= 0 && block_y < block.length) {
 					color = block[block_y][block_x] === 0 ? color : block_color
 				}
+
 				// Generate a unique key for every block
 				const k = row * grid[0].length + col;
+
 				// Generate a grid square
 				return <Square
 								key={k}
@@ -71,6 +57,24 @@ class Board extends Component {
 				{this.make_grid()}
 			</div>
 		)
+	}
+}
+
+const map_state_to_props = (state) => {
+	return {
+		grid: state.game.grid,
+		shape: state.game.shape,
+		rotation: state.game.rotation,
+		x: state.game.x,
+		y: state.game.y,
+		speed: state.game.speed,
+		is_running: state.game.is_running
+	}
+}
+
+const map_dispatch_to_props = () => {
+	return {
+		move_down
 	}
 }
 

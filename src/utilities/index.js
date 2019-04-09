@@ -121,10 +121,10 @@ export const grid_default = () => {
 	const array = []
 
 	for (let row = 0; row < rows; row++) {
-			array.push([])
-			for (let col = 0; col < cols; col++) {
-				array[row].push(0)
-			}
+		array.push([])
+		for (let col = 0; col < cols; col++) {
+			array[row].push(0)
+		}
 	}
 
 	return array
@@ -159,4 +159,42 @@ export const default_state = () => {
 		// Game isn't over yet
 		game_over: false
 	}
+}
+
+// Returns the next rotation for a shape
+// rotation can't exceed the last index of the the rotations for the given shape.
+export const next_rotation = (shape, rotation) => {
+	return (rotation + 1) % shapes[shape].length
+}
+
+export const can_move_to = (shape, grid, x, y, rotation) => {
+	const current_shape = shapes[shape][rotation]
+	// Loop through all rows and cols of the **shape**
+	for (let row = 0; row < current_shape.length; row++) {
+		for (let col = 0; col < current_shape[row].length; col++) {
+			// Look for a 1 here
+			if (current_shape[row][col] !== 0) {
+				// x offset on grid
+				const proposed_x = col + x
+				// y offset on grid
+				const proposed_y = row + y
+				if (proposed_y < 0) {
+					continue
+				}
+				// Get the row on the grid
+				const possible_row = grid[proposed_y]
+				// Check row exists
+				if (possible_row) {
+					// Check if this column in the row is undefined, if it's off the edges, 0, and empty
+					if (possible_row[proposed_x] === undefined || possible_row[proposed_x] !== 0) {
+						// undefined or not 0 and it's occupied we can't move here.
+						return false
+					}
+				} else {
+					return false
+				}
+			}
+		}
+	}
+	return true
 }
