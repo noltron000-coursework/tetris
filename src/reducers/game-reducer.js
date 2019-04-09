@@ -33,10 +33,10 @@ const game_reducer = (state = default_state(), action) => {
 
 	switch(action.type) {
 		case PAUSE:
-			return state
+		return { ...state, is_running: false }
 
 		case RESUME:
-			return state
+			return { ...state, is_running: true }
 
 		case RESTART:
 			return state

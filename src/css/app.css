@@ -167,6 +167,8 @@ and 'b'. The '.' represents an empty cell on the grid. */
 }
 
 .overlay {
+	height: 50vh;
+	top: 75vh;
 	font-size: 2em;
 }
 
