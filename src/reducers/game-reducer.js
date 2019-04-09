@@ -7,8 +7,8 @@ import {
 	GAME_OVER,
 	MOVE_UP,
 	MOVE_LEFT,
-	MOVE_DOWN,
 	MOVE_RIGHT,
+	MOVE_DOWN,
 	ROTATE_LEFT,
 	ROTATE_RIGHT } from '../actions'
 
